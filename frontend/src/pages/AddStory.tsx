@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 
-type Story = {
-  title: string;
-  description: string;
-};
-
 export default function AddStoryForm() {
   // const [story, setStory] = useState<Story>();
 

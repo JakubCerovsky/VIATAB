@@ -1,5 +1,3 @@
-import React from "react";
-import "./App.css";
 import { Navbar } from "./components";
 import { Outlet } from "react-router-dom";
 
@@ -19,7 +17,7 @@ declare global {
 
 export default function App() {
   return (
-    <div className="App">
+    <div className="app-container">
       <Navbar />
       <Outlet />
     </div>
