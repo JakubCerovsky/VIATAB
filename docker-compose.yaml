@@ -1,3 +1,4 @@
+# TODO: Try to figure out how to use GitHub Secrets in docker compose file
 services:
   db:
     image: "postgres:15.2-alpine"
@@ -7,10 +8,8 @@ services:
       - 5432:5432
     volumes:
       - db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=viatab-db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+    env_file:
+      - db/postgres.env
 
   backend:
     image: "viatab-backend:latest"
@@ -21,11 +20,8 @@ services:
       - 8080:8080
     depends_on:
       - db
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/viatab-db
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    env_file:
+      - db/spring_db.env
 
   frontend:
     image: "viatab-frontend:latest"
