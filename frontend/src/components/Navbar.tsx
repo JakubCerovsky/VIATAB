@@ -7,10 +7,14 @@ export default function Navbar() {
       <Link to="/" className="navbar-container_link">
         Stories
       </Link>
-      <Link to="/AddStory" className="navbar-container_link">
+      <Link
+        to="/new-story"
+        className="navbar-container_link"
+        id="add-story-link"
+      >
         <MdNoteAdd />
       </Link>
-      <Link to="/Departments" className="navbar-container_link">
+      <Link to="/departments" className="navbar-container_link">
         Departments
       </Link>
     </nav>

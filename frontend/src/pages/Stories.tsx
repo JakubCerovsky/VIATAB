@@ -18,22 +18,20 @@ export default function Stories() {
   }, []);
 
   return (
-    <div className="pokemons-container">
-      <div className="pokemons-container_pokecards">
-        {stories ? (
-          stories.map((story, index) => (
-            <StoryCard
-              key={index}
-              id={story.id}
-              title={story.title}
-              department={story.department}
-              description={story.description}
-            />
-          ))
-        ) : (
-          <p>Loading stories...</p>
-        )}
-      </div>
+    <div className="stories-container outlet-container">
+      {stories ? (
+        stories.map((story, index) => (
+          <StoryCard
+            key={index}
+            id={story.id}
+            title={story.title}
+            department={story.department}
+            description={story.description}
+          />
+        ))
+      ) : (
+        <p>Loading stories...</p>
+      )}
     </div>
   );
 }

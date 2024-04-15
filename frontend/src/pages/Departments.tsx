@@ -17,16 +17,14 @@ export default function Departments() {
   }, []);
 
   return (
-    <div className="pokemons-container">
-      <div className="pokemons-container_pokecards">
-        {departments ? (
-          departments.map((department, index) => (
-            <p key={index}>{department.name}</p>
-          ))
-        ) : (
-          <p>Loading departments...</p>
-        )}
-      </div>
+    <div className="outlet-container departments-container">
+      {departments ? (
+        departments.map((department, index) => (
+          <p key={index}>{department.name}</p>
+        ))
+      ) : (
+        <p>Loading departments...</p>
+      )}
     </div>
   );
 }
