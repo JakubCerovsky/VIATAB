@@ -5,8 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import viatab.backend.entity.Department;
 import viatab.backend.entity.Story;
-import viatab.backend.repository.IStoryRepository;
+import viatab.backend.dto.StoryDto;
+import viatab.backend.repository.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,22 +21,29 @@ import java.util.Optional;
 public class StoryController
 {
   private final IStoryRepository storyRepository;
+  private final IDepartmentRepository departmentRepository;
 
   @Autowired
-  public StoryController(IStoryRepository sr)
+  public StoryController(IStoryRepository sr, IDepartmentRepository dr)
   {
     storyRepository = sr;
+    departmentRepository = dr;
   }
 
   @PostMapping("/stories/v1")
-  public ResponseEntity<Object> createEntry(@Validated @RequestBody Story story)
+  public ResponseEntity<Object> createStory(@Validated @RequestBody StoryDto story)
   {
-    storyRepository.save(story);
-    return new ResponseEntity<>("Story successfully saved!", HttpStatus.CREATED);
+    Optional<Department> department = departmentRepository.findById(story.getDepartmentId());
+    if (department.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    Story storyToCreate = new Story(department.get(), story.getTitle(), story.getDescription());
+    storyRepository.save(storyToCreate);
+
+    return new ResponseEntity<>("Story successfully saved!", HttpStatus.OK);
   }
 
   @GetMapping("/stories/v1/{id}")
-  public ResponseEntity<Object> getStory(@PathVariable(value = "id") long storyId) {
+  public ResponseEntity<Object> getStory(@PathVariable(value = "id") Long storyId) {
     Optional<Story> story = storyRepository.findById(storyId);
     if (!story.isPresent()){
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -55,7 +64,7 @@ public class StoryController
   }
 
   @DeleteMapping("/stories/v1/{id}")
-  public ResponseEntity<Object> deleteStory(@PathVariable(value = "id") long storyId) {
+  public ResponseEntity<Object> deleteStory(@PathVariable(value = "id") Long storyId) {
     Optional<Story> story = storyRepository.findById(storyId);
     if (!story.isPresent()){
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
