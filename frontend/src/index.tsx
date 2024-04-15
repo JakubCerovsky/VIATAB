@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import { AddStory, Stories, Story, Department, Departments } from "./pages";
+import { AddStory, Stories, Story, Departments } from "./pages";
 
 const router = createHashRouter([
   {
@@ -15,22 +15,16 @@ const router = createHashRouter([
         element: <Stories />,
       },
       {
-        path: "/AddStory",
+        path: "/new-story",
         element: <AddStory />,
       },
       {
-        path: "/:storyId",
+        path: "/stories/:storyId",
         element: <Story />,
       },
-    ],
-  },
-  {
-    path: "/Deparments",
-    element: <Departments />,
-    children: [
       {
-        path: "Departments/:departmentId",
-        element: <Department />,
+        path: "/departments",
+        element: <Departments />,
       },
     ],
   },
