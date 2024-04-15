@@ -10,8 +10,11 @@ target/
 .idea/
 *.iml
 
-# Locally configured database connection details (security best practice)
-src/main/resources/
+# TODO: Ask why it not works
+# # Locally configured database connection details (security best practice)
+# src/main/resources/application.properties
+
+# !*.sql
 
 # Version control related files (already ignored by Git)
 .gitignore
