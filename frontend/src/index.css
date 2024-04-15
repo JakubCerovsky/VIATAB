@@ -1,8 +1,205 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  font-family: "Russo One", sans-serif;
+  letter-spacing: 1.2px;
+}
+
+:root {
+  --color-light: #eeeeee;
+  --color-yellow: yellow;
+  --box-border: 5px solid var(--color-yellow);
+}
+
+body {
+  background-color: var(--color-light);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-yellow);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 3rem;
+}
+
+.navbar-container_link {
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-bottom: 3px solid transparent;
+  transition: 1s;
+  align-self: center;
+  width: 130px;
+  text-align: end;
+}
+
+#add-story-link {
+  text-align: center;
+  font-size: 40px;
+  margin: 1rem;
+}
+
+.navbar-container_link:hover {
+  border-bottom: 3px solid var(--color-yellow);
+}
+
+.outlet-container {
+  width: 100%;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.stories-container {
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.departments-container {
+  flex-direction: column;
+  align-items: center;
+}
+
+.story-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 300px;
+}
+
+.story-container h3,
+.story-container p {
+  margin-top: 1rem;
+}
+
+.story-container p {
+  text-transform: none;
+}
+
+.story-container div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#delete-story-btn {
+  border: none;
+  outline: none;
+  font-size: 30px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#delete-story-btn:hover {
+  color: red;
+}
+
+.story_card-container {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2rem 3rem;
+  background-color: white;
+  width: 30%;
+  margin-bottom: 1rem;
+  color: black;
+  text-decoration: none;
+  box-shadow: 0 0 10px 0 black;
+  border-radius: 20px;
+  transition: 1s;
+}
+
+.story_card-container:hover {
+  transform: scale(1.03);
+}
+
+.story_card-container p {
+  transform: scale(0.8);
+  align-self: flex-start;
+}
+
+.story_card-container h1 {
+  align-self: center;
+  margin: 2rem 0;
+  border-bottom: 3px solid var(--color-yellow);
+}
+
+.new_story-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  justify-content: center;
+  align-items: center;
+}
+
+.new_story-container select,
+.new_story-container h1,
+.new_story-container input,
+.new_story-container button {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.new_story-container input {
+  text-transform: none;
+  padding: 0.5rem;
+}
+
+#department {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+#add-story-btn {
+  border: none;
+  outline: none;
+  font-size: 30px;
+  cursor: pointer;
+  transition: 0.5s;
+  width: fit-content;
+}
+
+#add-story-btn:hover {
+  color: green;
+}
+
+#add-story-btn:disabled:hover {
+  color: gray;
+  cursor: not-allowed;
+}
+@media only screen and (max-width: 1000px) {
+  .story_card-container {
+    width: 45%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .story_card-container {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .story_card-container {
+    width: 100%;
+  }
 }
