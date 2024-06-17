@@ -3,42 +3,37 @@ package viatab.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import viatab.backend.entity.Department;
-import viatab.backend.entity.Story;
-import viatab.backend.repository.IDepartmentRepository;
+import viatab.backend.service.DepartmentService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/viatab")
+@RequestMapping("/viatab/departments")
 public class DepartmentController
 {
-  private final IDepartmentRepository departmentRepository;
+  private final DepartmentService departmentService;
 
   @Autowired
-  public DepartmentController(IDepartmentRepository dr)
+  public DepartmentController(DepartmentService departmentService)
   {
-    departmentRepository = dr;
+    this.departmentService = departmentService;
   }
 
-  @GetMapping("/departments/v1/{id}")
+  @GetMapping("/v2/{id}")
   public ResponseEntity<Object> getDepartment(@PathVariable(value = "id") long departmentId) {
-    Optional<Department> department = departmentRepository.findById(departmentId);
-    if (!department.isPresent()){
+    Department department = departmentService.getDepartmentById(departmentId);
+    if (department==null){
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    return new ResponseEntity<>(department.get(), HttpStatus.OK);
+    return new ResponseEntity<>(department, HttpStatus.OK);
   }
 
-  @GetMapping("/departments/v1")
+  @GetMapping("/v2")
   public ResponseEntity<List<Department>> getDepartments()
   {
-    List<Department> departments = new ArrayList<>(departmentRepository.findAll());
-    return new ResponseEntity<>(departments, HttpStatus.OK);
+    return new ResponseEntity<>(departmentService.getAllDepartments(), HttpStatus.OK);
   }
 }
