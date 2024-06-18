@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # Replace with your desired domain name
+    via-tab.com: "ingress class"
+  name: frontend-ingress
+spec:
+  rules:
+    - host: via-tab.com # Replace with your actual domain name
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 3000
