@@ -1,0 +1,35 @@
+name: Deploy to Minikube
+
+on:
+  push:
+    branches:
+      - main # Trigger CD on push to main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Kubectl
+        uses: azure/setup-kubectl@v1
+        with:
+          version: "v1.21.0"
+
+      - name: Set up Minikube
+        run: |
+          minikube start --driver=docker
+
+      - name: Build and Tag Docker Image
+        run: |
+          docker-compose -f docker-compose.yaml build
+
+      - name: Point Docker CLI to Minikube's Docker daemon
+        run: |
+          eval $(minikube -p minikube docker-env)
+
+      - name: Deploy to Minikube
+        run: |
+          kubectl apply -f k8s/
